@@ -19,21 +19,20 @@ componentDidMount(){
   this.props.startSetMyEvents()
 }
 
+componentDidUpdate(){
+  console.log('updated');
+}
 
  render(){
-// console.log(this.props);
+
+
    return(
      <Fragment>
-
-
       {this.props.events.map((_event)=>{
-        return <MyEventListItem key={uuidv4()}   { ..._event} />
+       
+        return <MyEventListItem key={_event.id}   { ..._event} />
       })}
-   
-
-
       </Fragment>
-
    )
  }
 
@@ -43,42 +42,30 @@ componentDidMount(){
 const mapStateToProps = (state, props)=>{
 console.log(state.myevents);
 
+const group = ()=>{
 
-if(state.myevents.length>0){
-  let lastAddedEvent = state.myevents[state.myevents.length -1];
 }
 
-//
-// const group = ()=>{
-//   for(let i = 0; i<state.events.length; i++){
-//       if(state.myevents[i] && state.events[i].id === state.myevents[i].event_id){
-//         state.events[i].going = state.myevents[i].going;
-//         state.events[i].interested = state.myevents[i].interested
-//       }
-//       else{
-//         state.events[i].going = false
-//         state.events[i].interested = false
-//       }
-//   }
-// return state.events
-// }
-// if(lastAddedEvent){
-//   group()
-//
-// }
-      return{
-          events:sb(state.events, state.myevents),
-          myevents: state.myevents
 
-      }
+return{
+  events:sb(state.events, state.myevents),
+  myevents: state.myevents
+
+}
+
+
+
+// console.log(state);
+ console.log(sb(state.events, state.myevents));
+
 
 }
 
 const mapDispatchToProps = (dispatch, props)=>{
 
   return{
-    startSetMyEvents: ()=>{dispatch(startSetMyEvents())}
-
+    // startSetMyEvents: ()=>{dispatch(startSetMyEvents())}
+  startSetMyEvents: ()=>dispatch(startSetMyEvents()),
   }
 }
 
