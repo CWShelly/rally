@@ -161,7 +161,7 @@ setPic =(e,x)=>{
     const a = this.hasSet();
 
     a.then(()=>{
- 
+
       if(!this.state.tags )
       {
         console.log('no tags');
@@ -262,15 +262,15 @@ setPic =(e,x)=>{
 
 
     return(
-      <div >
+      <div className="col-sm-6">
 
       <div>
             <ul  >
             {this.state.interestsArr.map((item, x)=>{
               return <li    key={x}
             >
-              <span><button  >{item}</button>
-              <button   onClick={(e)=>{
+              <span><button className="btn btn-primary btn-xs" >{item}</button>
+              <button   className="btn btn-primary btn-xs"  onClick={(e)=>{
                 this.handleRemoveItem(item, x)
               }}>x</button></span>
               </li>

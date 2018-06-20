@@ -7,7 +7,7 @@ import EventForm from './EventForm';
 export class AddEvent extends React.Component{
 
  onSubmit=(_event)=>{
-   console.log(_event);
+ 
 let a = this.beforeSubmit(_event)
 
      this.props.startSetEvents()

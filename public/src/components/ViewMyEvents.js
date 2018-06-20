@@ -14,9 +14,8 @@ export class ViewMyEvents extends React.Component{
 render(){
 
   return(
-    <div >
-View All My Events (with option to filter and search later)
-<MyEventList />
+    <div className="container" >
+     <MyEventList />
      </div>
 
   )
