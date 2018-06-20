@@ -1,4 +1,6 @@
 export default (collection1,  collection2) =>{
+  console.log(collection1[0])
+  console.log(collection2[0]);
 let eventIdArr = [];
 let theeventarr= []
 let current;
@@ -16,15 +18,19 @@ for(let j = 0; j<collection1.length; j++){
      console.log(eventIdArr[k]);
       collection1[j].going = eventIdArr[k].going;
       collection1[j].interested = eventIdArr[k].interested;
+      collection1[j].event_id = eventIdArr[k].event_id
       collection1[j].myevent_id = eventIdArr[k].id
 
      theeventarr.push(collection1[j])
+   }
+   else{
+     // console.log(collection1[j].id);
    }
   }
 
 }
 
-
+// console.log(theeventarr);
 return theeventarr
 
 }

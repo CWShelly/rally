@@ -12,8 +12,8 @@ class MyEventListItem extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      id: props.id,
-      event_id: props.myevent_id,
+
+      event_id: props.event_id,
       going: props.going,
       interested: props.interested,
       createdAt: props.createdAt
@@ -32,13 +32,13 @@ class MyEventListItem extends React.Component{
        })
   }
 
-  setStateGoing=(event_id, success)=>{
+  setStateInterested=(event_id, success)=>{
 
        return new Promise((resolve, reject)=>{
          this.setState((prevState)=>({
            event_id,
-           going: !prevState.going,
-           // interested: !prevState.interested
+           // going: !prevState.going,
+           interested: !prevState.interested
          }))
          resolve(success);
          reject('fail')
@@ -46,18 +46,22 @@ class MyEventListItem extends React.Component{
   }
 
 
-onHandleGoing=(event_id)=>{
- let a = this.setStateGoing(event_id)
+onHandleGoing=(x)=>{
+  console.log(x);
+ let a = this.setStateGoing(x)
  .then(()=>{
    console.log(this.state);
-   this.props.startEditMyEvent(event_id, this.state)
+   // this.props.startEditMyEvent(x, this.state)
+
  })
 
 }
-onHandleInterest=(id)=>{
-  let a = this.setStateInterested(event_id)
+onHandleInterest=(x)=>{
+  console.log(x);
+  let a = this.setStateInterested(x)
   .then(()=>{
-    this.props.startEditMyEvent(id, this.state)
+    console.log(this.state);
+    this.props.startEditMyEvent(x, this.state)
   })
 }
 
@@ -66,11 +70,11 @@ onHandleInterest=(id)=>{
     return(
       <div className="row">
        {this.props.event_name} at {this.props.city}
-        <button onClick={(e)=>{this.onHandleGoing(this.props.myevent_id)}} >
+        <button onClick={(e)=>{this.onHandleGoing(this.props.id)}} >
           {this.state.going ? 'going' : 'attend'}
         </button>
       { !this.state.going &&
-         <button onClick={(e)=>{this.onHandleInterest(this.props.myevent_id)}} >
+         <button onClick={(e)=>{this.onHandleInterest(this.props.id)}} >
           {this.state.interested ? 'interested: y' : 'interested?'}
          </button>
       }

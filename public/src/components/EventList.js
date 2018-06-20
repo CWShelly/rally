@@ -26,13 +26,13 @@ componentDidUpdate(){
 
 
 render(){
-
+console.log(this.props);
 if(this.props.events[this.props.events.length -1]){
     return(
       <div className="rowr">
        {this.props.events.map((_event)=>{
 
-         return <EventListItem key={uuidv4()}  going={_event.going} interested={_event.interested}   { ..._event} />
+         return <EventListItem key={_event.id}  going={_event.going} interested={_event.interested}   { ..._event} />
        })}
        </div>
     )
