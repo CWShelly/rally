@@ -9,7 +9,9 @@ import { login, logout } from './actions/auth';
 import configureStore from './store/configureStore';
 import AppRouter, { history } from './routers/AppRouter';
 import { firebase } from './firebase/firebase';
-
+// import 'normalize.css/normalize.css';
+import './styles/styles.scss';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const store = configureStore();
 

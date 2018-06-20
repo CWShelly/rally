@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
    <div  >
 
-       <p> The Maquis
+       <p> Rally
        </p>
 
       <button onClick={startLogin}>Enter</button>

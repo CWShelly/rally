@@ -14,8 +14,8 @@ export class ViewEvents extends React.Component{
 render(){
 // console.log(this.props);
   return(
-    <div >
-View All Events (with option to filter and search later)
+    <div className="container">
+
 <EventList />
      </div>
 

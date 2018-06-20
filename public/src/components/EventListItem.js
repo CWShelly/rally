@@ -71,11 +71,8 @@ class EventListItem extends React.Component{
     a.then( ()=>{
 
             if(this.state.going){
-
-                // add to myEvents
                 if(findByEventId(this.props.myEvents, id).length >0){
                   this.props.startEditMyEvent(findByEventId(this.props.myEvents, id)[0].id, this.state)
-                  // log
                 }
                 else{
                 this.props.startAddMyEvent({
@@ -84,11 +81,10 @@ class EventListItem extends React.Component{
                 })
               }
             }
-
-
             else{
-
-                  this.props.startRemoveMyEvent({id:findByEventId( this.props.myEvents, id)[0].id })
+                this.props.startRemoveMyEvent({
+                  id:findByEventId( this.props.myEvents, id)[0].id
+                })
               }
 
           }
@@ -109,12 +105,8 @@ class EventListItem extends React.Component{
        })
 
        let interestedParty = {};
-
        interestedParty[localStorage.getItem('user_id')] = true;
-       let obj = Object.assign({}, interestedParty)
-
-
-
+       // let obj = Object.assign({}, interestedParty)
 
        this.setState((prevState)=>({
          people_interested: Object.assign({}, interestedParty, prevState.people_interested)

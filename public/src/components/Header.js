@@ -23,7 +23,7 @@ export class Header extends React.Component{
       <Container fluid>
             <div className="row">
                   <div className="col ml-2">
-                    <h1>events</h1>
+                    <h1>Rally</h1>
                     <p>{this.state.user_info.displayName ? this.state.user_info.displayName : 'for readers'}</p>
                   </div>
 
