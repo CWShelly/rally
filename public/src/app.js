@@ -53,6 +53,7 @@ store.dispatch(startSetEvents())
      .then(() => {
        console.log('log in');
        store.dispatch(startSetMyEvents())
+     
        renderApp();
        if(history.location.pathname === '/'){
          history.push('/events')

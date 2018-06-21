@@ -15,7 +15,7 @@ export default class EventForm extends React.Component{
       zip: props.event ? props.event._zip : '',
       date: props.event ? props.event.date : '',
       time: props.event ? props.event.time : '',
-      createdAt: props.event ? moment(): moment(),
+      createdAt: props.event ? props.event.createdAt: moment().format('MMMM Do YYYY, h:mm:ss a'),
       error: '',
       event_image: props.event ? props.event.event_image : '',
       input: '',

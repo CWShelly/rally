@@ -41,7 +41,7 @@ if(this.props.events[this.props.events.length -1]){
   else{
     return(
       <Fragment>
-      loading ...
+       
       </Fragment>
     )
   }

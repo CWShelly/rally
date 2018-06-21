@@ -1,36 +1,35 @@
-export default (collection1,  collection2) =>{
-  console.log(collection1[0])
-  console.log(collection2[0]);
-let eventIdArr = [];
+export default (events,  myevents) =>{
+console.log('sb');
+if(myevents.length >0){
+  console.log(events[0])
+  console.log(myevents[0]);
+}
+let myeventarr = [];
 let theeventarr= []
 let current;
-// for(let i =0; i<collection2.length; i++){
-//   eventIdArr.push(collection2[i].event_id)
-// }
 
-for(let i =0; i<collection2.length; i++){
-  eventIdArr.push(collection2[i])
+for(let i =0; i<myevents.length; i++){
+  myeventarr.push(myevents[i])
 }
 
-for(let j = 0; j<collection1.length; j++){
-  for(let k = 0; k<eventIdArr.length; k++){
-   if(collection1[j].id == eventIdArr[k].event_id){
-     console.log(eventIdArr[k]);
-      collection1[j].going = eventIdArr[k].going;
-      collection1[j].interested = eventIdArr[k].interested;
-      collection1[j].event_id = eventIdArr[k].event_id
-      collection1[j].myevent_id = eventIdArr[k].id
+for(let j = 0; j<events.length; j++){
+  for(let k = 0; k<myeventarr.length; k++){
+   if(events[j].id == myeventarr[k].event_id){
+      events[j].going = myeventarr[k].going;
+      events[j].interested = myeventarr[k].interested;
+      events[j].event_id = myeventarr[k].event_id
+      console.log(events[j].event_id, myevents[k].event_id);
+      events[j].myevent_id = myeventarr[k].id
 
-     theeventarr.push(collection1[j])
+     theeventarr.push(events[j])
    }
-   else{
-     // console.log(collection1[j].id);
-   }
+
   }
 
 }
 
-// console.log(theeventarr);
+
 return theeventarr
+
 
 }
