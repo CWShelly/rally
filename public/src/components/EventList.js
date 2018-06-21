@@ -20,13 +20,11 @@ componentDidMount(){
 
 }
 
-componentDidUpdate(){
-  console.log('updated');
-}
+
 
 
 render(){
-console.log(this.props);
+
 if(this.props.events[this.props.events.length -1]){
     return(
       <div className="rowr">
@@ -41,7 +39,7 @@ if(this.props.events[this.props.events.length -1]){
   else{
     return(
       <Fragment>
-       
+
       </Fragment>
     )
   }
@@ -55,7 +53,7 @@ if(this.props.events[this.props.events.length -1]){
 const mapStateToProps = (state, props)=>{
 
 let lastAddedEvent = state.events[state.events.length -1];
-// console.log(lastAddedEvent);
+ 
 const group = ()=>{
   for(let i = 0; i<state.events.length; i++){
       if(state.myevents[i] && state.events[i].id === state.myevents[i].event_id){

@@ -44,9 +44,7 @@ const mapStateToProps = (state, props)=>{
 console.log(state);
 
 
-
-
-console.log(sb(state.events, state.myevents))
+ 
 return{
   events:sb(state.events, state.myevents),
   myevents: state.myevents

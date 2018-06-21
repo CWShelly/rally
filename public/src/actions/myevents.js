@@ -35,13 +35,11 @@ export const startAddMyEvent = (myEventData = {}) => {
 
 
 export const startRemoveMyEvent =({ id} = {})=>{
-console.log('removing');
-
+ console.log('removing');
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
     database.ref(`users/${uid}/myEvents/${ id }`).remove()
     .then(() => {
-      console.log('after database ref part');
       dispatch(removeMyEvent({ id }))
     })
   }
