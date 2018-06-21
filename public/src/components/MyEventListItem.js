@@ -80,13 +80,12 @@ onComponentDidUpdate(){
 }
 
 onHandleRemove=()=>{
-  console.log(this.props);
+ 
   this.props.startRemoveMyEvent({id: this.props.myevent_id})
 }
 
   render(){
-    console.log(this.props);
-    console.log(this.state);
+
     return(
       <div className="row">
        {this.props.event_name} at {this.props.city}

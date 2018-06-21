@@ -43,7 +43,7 @@ class EventListItem extends React.Component{
          this.setState((prevState)=>({
            event_id,
            going: !prevState.going,
-           interested: true ? false : false
+           interested: false
          }))
          resolve(success);
          reject('fail')
@@ -66,52 +66,87 @@ class EventListItem extends React.Component{
   onHandleGoing=(id)=>{
     let a = this.setEventIdGoing(id);
     a.then( ()=>{
-
-            if(this.state.going){
-                if(findByEventId(this.props.myEvents, id).length >0){
-                  this.props.startEditMyEvent(findByEventId(this.props.myEvents, id)[0].id, this.state)
-                }
-                else{
+      if(this.state.people_interested[localStorage.getItem('user_id')] === undefined &&
+      this.state.people_going[localStorage.getItem('user_id')] === undefined){
+             localStorage.setItem('creator_id', this.props.creator_id)
                 this.props.startAddMyEvent({
-                  event_id:this.state.event_id,
-                  going:this.state.going,
-                  createdAt:  moment().format('MMMM Do YYYY, h:mm:ss a')
-                })
-              }
-            }
-            else{
-                this.props.startRemoveMyEvent({
-                  id:findByEventId( this.props.myEvents, id)[0].id
-                })
-              }
+                 event_id:this.state.event_id,
+                 going:this.state.going,
+                 interested: this.state.interested,
+                 createdAt:  moment().format('MMMM Do YYYY, h:mm:ss a')
+               })
+           let goingParty = {};
+           goingParty[localStorage.getItem('user_id')] = this.state.giong ? true : false;
+           this.setState((prevState)=>({
+             people_going: Object.assign({}, goingParty, prevState.people_going)
+           }))
+      let theEvent=
+      {  event_name: this.props.event_name,
+        street_address:this.props.street_address,
+        city:  this.props.city,
+        _state:this. props._state,
+        zip: this.props.zip,
+        date: this.props.date,
+        time: this.props.time,
+        createdAt: this.props.createdAt,
+       event_image: this.props.event_image,
+       people_interested: this.state.people_interested,
+       people_going: this.state.people_going,
+         creator_id: this.props.creator_id}
+      console.log(theEvent);
+         this.props.startEditEvent(this.props.id, theEvent)
+         }
+         else{
+           let goingParty = {};
+           goingParty[localStorage.getItem('user_id')] = this.state.going
+           this.setState((prevState)=>({
+             people_going: Object.assign({}, goingParty, prevState.people_going)
+           }))
 
+           let theEvent=
+             {  event_name: this.props.event_name,
+               street_address:this.props.street_address,
+               city:  this.props.city,
+               _state:this. props._state,
+               zip: this.props.zip,
+               date: this.props.date,
+               time: this.props.time,
+               createdAt: this.props.createdAt,
+              event_image: this.props.event_image,
+              people_interested: this.state.people_interested,
+              people_going: this.state.people_going,
+                creator_id: this.props.creator_id}
+           console.log(theEvent);
+           let myEvent ={
+             event_id: this.state.event_id,
+             going: this.state.going,
+             interested: this.state.interested,
+             createdAt: this.state.createdAt
+           }
+                this.props.startEditEvent(this.props.id, theEvent);
+                this.props.startEditMyEvent(findByEventId(this.props.myEvents, id)[0].id, myEvent)
+         }
           }
   )
   }
 
   onHandleInterest=(id)=>{
-
     let a = this.setEventIdInterested(id);
     a.then(()=>{
-
-     if(this.state.interested){
+  if(this.state.people_interested[localStorage.getItem('user_id')] === undefined &&
+  this.state.people_going[localStorage.getItem('user_id')] === undefined){
          localStorage.setItem('creator_id', this.props.creator_id)
-       this.props.startAddMyEvent({
-         event_id:this.state.event_id,
-         going:this.state.going,
-         interested: this.state.interested,
-         createdAt:  props.createdAt
-       })
-
+            this.props.startAddMyEvent({
+             event_id:this.state.event_id,
+             going:this.state.going,
+             interested: this.state.interested,
+             createdAt:  moment().format('MMMM Do YYYY, h:mm:ss a')
+           })
        let interestedParty = {};
-       interestedParty[localStorage.getItem('user_id')] = true;
-       // let obj = Object.assign({}, interestedParty)
-
+       interestedParty[localStorage.getItem('user_id')] = this.state.interested
        this.setState((prevState)=>({
          people_interested: Object.assign({}, interestedParty, prevState.people_interested)
        }))
-
-
 let theEvent=
   {  event_name: this.props.event_name,
     street_address:this.props.street_address,
@@ -125,17 +160,42 @@ let theEvent=
    people_interested: this.state.people_interested,
    people_going: this.state.people_going,
      creator_id: this.props.creator_id}
-
+console.log(theEvent);
      this.props.startEditEvent(this.props.id, theEvent)
-
-
      }
      else{
 
-           this.props.startRemoveMyEvent({id:findByEventId( this.props.myEvents, id)[0].id })
+       let interestedParty = {};
+       interestedParty[localStorage.getItem('user_id')] = this.state.interested
+       this.setState((prevState)=>({
+         people_interested: Object.assign({}, interestedParty, prevState.people_interested)
+       }))
+
+       let theEvent=
+         {  event_name: this.props.event_name,
+           street_address:this.props.street_address,
+           city:  this.props.city,
+           _state:this. props._state,
+           zip: this.props.zip,
+           date: this.props.date,
+           time: this.props.time,
+           createdAt: this.props.createdAt,
+          event_image: this.props.event_image,
+          people_interested: this.state.people_interested,
+          people_going: this.state.people_going,
+            creator_id: this.props.creator_id}
+       console.log(this.state);
+
+
+       let myEvent ={
+         event_id: this.state.event_id,
+         going: this.state.going,
+         interested: this.state.interested,
+         createdAt: this.state.createdAt
+       }
+            this.props.startEditEvent(this.props.id, theEvent);
+            this.props.startEditMyEvent(findByEventId(this.props.myEvents, id)[0].id, myEvent)
      }
-
-
     })
   }
 
@@ -143,7 +203,9 @@ let theEvent=
 
 
   render(){
-
+  console.log(this.state.people_going);
+  console.log(this.state.people_interested);
+  console.log(this.state.people_interested[localStorage.getItem('user_id')]);
     return(
       <div className="row">
        {this.props.event_name} at {this.props.city}
