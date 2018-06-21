@@ -6,8 +6,9 @@ import uuidv4 from 'uuid/v4';
 import { startAddMyEvent, startSetMyEvents, startEditMyEvent, startRemoveMyEvent } from '../actions/myevents';
 import { startEditEvent } from '../actions/events';
 import findByEventId from '../selectors/findById';
+import moment from 'moment';
 
-
+const now = moment();
 class EventListItem extends React.Component{
 
   constructor(props){
@@ -33,10 +34,6 @@ class EventListItem extends React.Component{
        creator_id: props.creator_id
     }
   }
-
-
-
-
 
 
 
@@ -77,7 +74,8 @@ class EventListItem extends React.Component{
                 else{
                 this.props.startAddMyEvent({
                   event_id:this.state.event_id,
-                  going:this.state.going
+                  going:this.state.going,
+                  createdAt:  moment().format('MMMM Do YYYY, h:mm:ss a')
                 })
               }
             }
@@ -101,7 +99,8 @@ class EventListItem extends React.Component{
        this.props.startAddMyEvent({
          event_id:this.state.event_id,
          going:this.state.going,
-         interested: this.state.interested
+         interested: this.state.interested,
+         createdAt:  props.createdAt
        })
 
        let interestedParty = {};

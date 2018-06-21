@@ -10,9 +10,10 @@ import { startEditEvent } from '../actions/events';
 class MyEventListItem extends React.Component{
 
   constructor(props){
-    super(props);
-    this.state={
 
+    super(props);
+    console.log(props);
+    this.state={
       event_id: props.event_id,
       going: props.going,
       interested: props.interested,
@@ -20,24 +21,20 @@ class MyEventListItem extends React.Component{
     }
   }
   setStateGoing=(event_id, success)=>{
-
        return new Promise((resolve, reject)=>{
          this.setState((prevState)=>({
-           event_id,
            going: !prevState.going,
-           interested: true ? false : false
+           interested: false
          }))
+         console.log(this.state);
          resolve(success);
          reject('fail')
        })
   }
 
   setStateInterested=(event_id, success)=>{
-
        return new Promise((resolve, reject)=>{
          this.setState((prevState)=>({
-           event_id,
-           // going: !prevState.going,
            interested: !prevState.interested
          }))
          resolve(success);
@@ -47,37 +44,63 @@ class MyEventListItem extends React.Component{
 
 
 onHandleGoing=(x)=>{
-  console.log(x);
+  console.log('handle going');
+  console.log('myevent_id: ', x);
+     console.log(this.state);
+
  let a = this.setStateGoing(x)
  .then(()=>{
+   console.log('handle going state');
    console.log(this.state);
-   // this.props.startEditMyEvent(x, this.state)
+       console.log(this.props);
+   this.props.startEditMyEvent(x, this.state)
 
  })
 
+
 }
 onHandleInterest=(x)=>{
-  console.log(x);
+  console.log('myevent_id: ', x);
+    console.log(this.props);
   let a = this.setStateInterested(x)
   .then(()=>{
+    console.log(this.props);
     console.log(this.state);
     this.props.startEditMyEvent(x, this.state)
   })
 }
 
+onComponentDidMount(){
+  console.log(' my event list item mounted');
+  console.log(this.state);
+}
+onComponentDidUpdate(){
+  console.log('my event list item updated');
+      console.log(this.state);
+}
+
+onHandleRemove=()=>{
+  console.log(this.props);
+  this.props.startRemoveMyEvent({id: this.props.myevent_id})
+}
+
   render(){
     console.log(this.props);
+    console.log(this.state);
     return(
       <div className="row">
        {this.props.event_name} at {this.props.city}
-        <button onClick={(e)=>{this.onHandleGoing(this.props.id)}} >
+        <button onClick={(e)=>{this.onHandleGoing(this.props.myevent_id)}} >
           {this.state.going ? 'going' : 'attend'}
         </button>
       { !this.state.going &&
-         <button onClick={(e)=>{this.onHandleInterest(this.props.id)}} >
+         <button onClick={(e)=>{this.onHandleInterest(this.props.myevent_id)}} >
           {this.state.interested ? 'interested: y' : 'interested?'}
          </button>
       }
+      <button onClick={this.onHandleRemove} >
+        Delete
+      </button>
       </div>
 
     )

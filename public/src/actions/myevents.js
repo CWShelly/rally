@@ -59,6 +59,7 @@ export const editMyEvent = (id, updates)=>({
 })
 
 export const startEditMyEvent = (id, updates) => {
+  console.log(id);
 console.log(updates);
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
