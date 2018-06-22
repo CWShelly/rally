@@ -135,6 +135,7 @@ class EventListItem extends React.Component{
     a.then(()=>{
   if(this.state.people_interested[localStorage.getItem('user_id')] === undefined &&
   this.state.people_going[localStorage.getItem('user_id')] === undefined){
+    console.log('not interested or going yet');
          localStorage.setItem('creator_id', this.props.creator_id)
             this.props.startAddMyEvent({
              event_id:this.state.event_id,
@@ -144,9 +145,12 @@ class EventListItem extends React.Component{
            })
        let interestedParty = {};
        interestedParty[localStorage.getItem('user_id')] = this.state.interested
+
        this.setState((prevState)=>({
          people_interested: Object.assign({}, interestedParty, prevState.people_interested)
        }))
+       console.log(interestedParty);
+
 let theEvent=
   {  event_name: this.props.event_name,
     street_address:this.props.street_address,
@@ -164,13 +168,22 @@ console.log(theEvent);
      this.props.startEditEvent(this.props.id, theEvent)
      }
      else{
-
+    console.log('already interested or going');
        let interestedParty = {};
        interestedParty[localStorage.getItem('user_id')] = this.state.interested
+       // console.log(tihs.state.);
+       console.log(interestedParty);
        this.setState((prevState)=>({
-         people_interested: Object.assign({}, interestedParty, prevState.people_interested)
+         people_interested: Object.assign({}, prevState.people_interested, interestedParty)
        }))
 
+       // this.setState((prevState)=>({
+       //   people_interested: Object.assign({}, interestedParty)
+       // }))
+       console.log(this.state.people_interested);
+
+
+       console.log(this.state.interested);
        let theEvent=
          {  event_name: this.props.event_name,
            street_address:this.props.street_address,
@@ -193,6 +206,7 @@ console.log(theEvent);
          interested: this.state.interested,
          createdAt: this.state.createdAt
        }
+       console.log('editing event');
             this.props.startEditEvent(this.props.id, theEvent);
             this.props.startEditMyEvent(findByEventId(this.props.myEvents, id)[0].id, myEvent)
      }
