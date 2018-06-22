@@ -89,18 +89,24 @@ class EventListItem extends React.Component{
         date: this.props.date,
         time: this.props.time,
         createdAt: this.props.createdAt,
-       event_image: this.props.event_image,
-       people_interested: this.state.people_interested,
-       people_going: this.state.people_going,
-         creator_id: this.props.creator_id}
+        event_image: this.props.event_image,
+        people_interested: this.state.people_interested,
+        people_going: this.state.people_going,
+        creator_id: this.props.creator_id}
       console.log(theEvent);
          this.props.startEditEvent(this.props.id, theEvent)
          }
          else{
            let goingParty = {};
-           goingParty[localStorage.getItem('user_id')] = this.state.going
+           goingParty[localStorage.getItem('user_id')] = this.state.going;
+           let interestedParty={};
+           interestedParty[localStorage.getItem('user_id')] = this.state.interested;
+
+
            this.setState((prevState)=>({
-             people_going: Object.assign({}, goingParty, prevState.people_going)
+             people_going: Object.assign({}, prevState.people_going, goingParty),
+             people_interested: Object.assign({}, prevState.people_interested, interestedParty),
+
            }))
 
            let theEvent=
