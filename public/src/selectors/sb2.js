@@ -1,10 +1,10 @@
-export default (collection1,  collection2) =>{
-let eventIdArr = [];
+export default (collection1,  creatorID) =>{
+  console.log(collection1);
+  console.log(creatorID);
 
-for(let i =0; i<collection2.length; i++){
-  console.log(collection2[i].event_id);
-  eventIdArr.push(collection2[i].event_id)
-}
-return eventIdArr
+let filtered = collection1.filter((collection)=>{
+  return collection['creator_id'] === creatorID
+})
 
+return filtered;
 }

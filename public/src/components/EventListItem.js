@@ -93,7 +93,7 @@ class EventListItem extends React.Component{
         people_interested: this.state.people_interested,
         people_going: this.state.people_going,
         creator_id: this.props.creator_id}
-      console.log(theEvent);
+
          this.props.startEditEvent(this.props.id, theEvent)
          }
          else{
@@ -122,7 +122,7 @@ class EventListItem extends React.Component{
               people_interested: this.state.people_interested,
               people_going: this.state.people_going,
                 creator_id: this.props.creator_id}
-           console.log(theEvent);
+
            let myEvent ={
              event_id: this.state.event_id,
              going: this.state.going,
@@ -141,7 +141,7 @@ class EventListItem extends React.Component{
     a.then(()=>{
   if(this.state.people_interested[localStorage.getItem('user_id')] === undefined &&
   this.state.people_going[localStorage.getItem('user_id')] === undefined){
-    console.log('not interested or going yet');
+
          localStorage.setItem('creator_id', this.props.creator_id)
             this.props.startAddMyEvent({
              event_id:this.state.event_id,
@@ -155,7 +155,7 @@ class EventListItem extends React.Component{
        this.setState((prevState)=>({
          people_interested: Object.assign({}, interestedParty, prevState.people_interested)
        }))
-       console.log(interestedParty);
+
 
 let theEvent=
   {  event_name: this.props.event_name,
@@ -170,26 +170,20 @@ let theEvent=
    people_interested: this.state.people_interested,
    people_going: this.state.people_going,
      creator_id: this.props.creator_id}
-console.log(theEvent);
+
      this.props.startEditEvent(this.props.id, theEvent)
      }
      else{
-    console.log('already interested or going');
+
        let interestedParty = {};
        interestedParty[localStorage.getItem('user_id')] = this.state.interested
-       // console.log(tihs.state.);
-       console.log(interestedParty);
+
        this.setState((prevState)=>({
          people_interested: Object.assign({}, prevState.people_interested, interestedParty)
        }))
 
-       // this.setState((prevState)=>({
-       //   people_interested: Object.assign({}, interestedParty)
-       // }))
-       console.log(this.state.people_interested);
 
 
-       console.log(this.state.interested);
        let theEvent=
          {  event_name: this.props.event_name,
            street_address:this.props.street_address,
@@ -203,7 +197,6 @@ console.log(theEvent);
           people_interested: this.state.people_interested,
           people_going: this.state.people_going,
             creator_id: this.props.creator_id}
-       console.log(this.state);
 
 
        let myEvent ={
@@ -212,8 +205,9 @@ console.log(theEvent);
          interested: this.state.interested,
          createdAt: this.state.createdAt
        }
-       console.log('editing event');
+     ;
             this.props.startEditEvent(this.props.id, theEvent);
+   
             this.props.startEditMyEvent(findByEventId(this.props.myEvents, id)[0].id, myEvent)
      }
     })
@@ -223,14 +217,13 @@ console.log(theEvent);
 
 
   render(){
-  console.log(this.state.people_going);
-  console.log(this.state.people_interested);
-  console.log(this.state.people_interested[localStorage.getItem('user_id')]);
+
     return(
       <div className="row">
        {this.props.event_name} at {this.props.city}
-        <button onClick={(e)=>{this.onHandleGoing(this.props.id)}} >{this.state.going ? 'going' : 'attend'}</button>
-      { !this.state.going && <button onClick={(e)=>{this.onHandleInterest(this.props.id)}} >{this.state.interested ? 'interested: y' : 'interested?'}</button>
+        <button   className={this.state.going ? "btn btn-primary btn-xs" : "btn btn-secondary btn-xs"}  onClick={(e)=>{this.onHandleGoing(this.props.id)}} >{this.state.going ? 'going' : 'attend'}</button>
+      { !this.state.going && <button
+        className={this.state.interested ? "btn btn-info btn-xs" : "btn btn-secondary btn-xs"}  onClick={(e)=>{this.onHandleInterest(this.props.id)}} >{this.state.interested ? 'interested: y' : 'interested?'}</button>
       }
       </div>
 

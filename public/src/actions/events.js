@@ -33,11 +33,14 @@ export const startAddEvent = (eventData = {}) => {
   // database.ref(`events/${uid}/events`).push(theEvent)
     database.ref(`events`).push(theEvent)
   .then((ref) => {
+    console.log(ref.key);
+    localStorage.setItem('just_created_event_id', ref.key)
     dispatch(addEvent({
       id: ref.key,
       ... theEvent
     }));
   })
+
   }
 
 }

@@ -8,28 +8,30 @@ export default class EventForm extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      event_name: props.event ? props.event.event_name : '',
-      street_address:props.event ? props.event.street_address : '',
-      city:  props.event ? props.event.city : '',
-      _state: props.event ? props.event._state : '',
-      zip: props.event ? props.event._zip : '',
-      date: props.event ? props.event.date : '',
-      time: props.event ? props.event.time : '',
-      createdAt: props.event ? props.event.createdAt: moment().format('MMMM Do YYYY, h:mm:ss a'),
+      event_name: props._event ? props._event.event_name : '',
+      street_address:props._event ? props._event.street_address : '',
+      city:  props._event ? props._event.city : '',
+      _state: props._event ? props._event._state : '',
+      zip: props._event ? props._event.zip : '',
+      date: props._event ? props._event.date : '',
+      time: props._event ? props._event.time : '',
+      createdAt: props._event ? props._event.createdAt: moment().format('MMMM Do YYYY, h:mm:ss a'),
       error: '',
-      event_image: props.event ? props.event.event_image : '',
+      event_image: props._event ? props._event.event_image : '',
       input: '',
-      interestsArr: props.event ? Object.keys(props.event.tags) : [],
-      interests: props.event ? props.event.interests : {},
-      tags: props.event ? props.event.tags : {},
-      people_interested: props.event ? props.event.people_interested : {},
-      people_going: props.event ? props.event.people_going: {},
+      interestsArr: props._event ? Object.keys(props._event.tags) : [],
+      interests: props._event ? props._event.interests : {},
+      tags: props._event ? props._event.tags : {},
+      people_interested: props._event ? props._event.people_interested : {},
+      people_going: props._event ? props._event.people_going: {},
       progress: 0,
       file: '',
-      creator_id: 'tbd'
+      creator_id: 'tbd',
+      initial_going_and_interested: ''
 
     }
   }
+
 
 
 
@@ -161,13 +163,19 @@ setPic =(e,x)=>{
     const a = this.hasSet();
 
     a.then(()=>{
+const goingInterested ={}
+goingInterested[localStorage.getItem('user_id')] =true
 
       if(!this.state.tags )
       {
         console.log('no tags');
           this.setState(()=>({error:'Please enter some tags.'}))
       } else{
-        this.setState(()=>({error: ''}));
+        this.setState(()=>({error: '',
+        people_going:Object.assign({}, goingInterested),
+        people_interested:Object.assign({}, goingInterested)
+
+      }));
         if(!this.state.error){
           console.log('no error');
 

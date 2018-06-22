@@ -8,7 +8,7 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import NotFound from '../components/NotFound';
 import AddEvent from '../components/AddEvent';
-
+import EditEvent from '../components/EditEvent';
 // import ViewChapterSummaryPage from '../components/ViewChapterSummaryPage';
 
 // import Profile from '../components/Profile';
@@ -32,7 +32,7 @@ const AppRouter = ()=>(
     <PrivateRoute path="/events" component={ViewEvents} />
     <PrivateRoute path="/myevents" component={ViewMyEvents} />
     <PrivateRoute path="/addevent" component={AddEvent} />
-
+    <PrivateRoute path="/editevent/:id" component={EditEvent} />
   <Route component={NotFound} />
   </Switch>
   </div>
