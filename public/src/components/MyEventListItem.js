@@ -60,27 +60,17 @@ onHandleGoing=(x)=>{
 
 }
 onHandleInterest=(x)=>{
-  console.log('myevent_id: ', x);
-    console.log(this.props);
+
   let a = this.setStateInterested(x)
   .then(()=>{
-    console.log(this.props);
-    console.log(this.state);
+
     this.props.startEditMyEvent(x, this.state)
   })
 }
 
-onComponentDidMount(){
-  console.log(' my event list item mounted');
-  console.log(this.state);
-}
-onComponentDidUpdate(){
-  console.log('my event list item updated');
-      console.log(this.state);
-}
 
 onHandleRemove=()=>{
- 
+
   this.props.startRemoveMyEvent({id: this.props.myevent_id})
 }
 
@@ -89,15 +79,15 @@ onHandleRemove=()=>{
     return(
       <div className="row">
        {this.props.event_name} at {this.props.city}
-        <button onClick={(e)=>{this.onHandleGoing(this.props.myevent_id)}} >
+        <button className={this.state.going ? "btn btn-success btn-xs" : "btn btn-secondary btn-xs"} onClick={(e)=>{this.onHandleGoing(this.props.myevent_id)}} >
           {this.state.going ? 'going' : 'attend'}
         </button>
       { !this.state.going &&
-         <button onClick={(e)=>{this.onHandleInterest(this.props.myevent_id)}} >
-          {this.state.interested ? 'interested: y' : 'interested?'}
+         <button  className={this.state.interested ? "btn btn-info btn-xs" : "btn btn-secondary btn-xs"} onClick={(e)=>{this.onHandleInterest(this.props.myevent_id)}} >
+          {this.state.interested ? 'interested' : 'interested?'}
          </button>
       }
-      <button onClick={this.onHandleRemove} >
+      <button className={"btn btn-danger btn-xs"} onClick={this.onHandleRemove} >
         Delete
       </button>
       </div>

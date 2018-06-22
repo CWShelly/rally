@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import MyEventListItem from './MyEventListItem';
+import MyCreatedEventListItem from './MyCreatedEventListItem';
 import { startSetMyEvents } from '../actions/myevents';
 import uuidv4 from 'uuid/v4';
 import getEvents from '../selectors/getEventsById';
-import sb from '../selectors/sb'
+import sb from '../selectors/sb';
+import sb2 from '../selectors/sb2'
 
 export class MyEventList extends React.Component{
 
@@ -16,24 +18,32 @@ constructor(props){
 }
 
 componentDidMount(){
-  console.log('mounted');
+
   this.props.startSetMyEvents()
 }
 
-componentDidUpdate(){
-  console.log('my events list updated');
-}
+
 
  render(){
-console.log('my event list rendered');
 
+console.log(this.props.eventsICreated);
    return(
-     <Fragment>
+     <div >
+     {this.props.events.length > 0 ? <h1>Events that I am either attending or interested in</h1> : ''}
       {this.props.events.map((_event)=>{
 
         return <MyEventListItem key={_event.id}   { ..._event} />
       })}
-      </Fragment>
+
+      {this.props.eventsICreated.length > 0 && <h1>Events I created</h1>}
+
+      {this.props.eventsICreated.map((_event)=>{
+
+        return <MyCreatedEventListItem key={_event.id}   { ..._event} />
+      })}
+
+
+      </div>
    )
  }
 
@@ -41,20 +51,12 @@ console.log('my event list rendered');
 
 
 const mapStateToProps = (state, props)=>{
-console.log(state);
 
-
- 
 return{
   events:sb(state.events, state.myevents),
+  eventsICreated: sb2(state.events, localStorage.getItem('user_id')),
   myevents: state.myevents
-
 }
-
-
-
-;
-
 
 }
 
