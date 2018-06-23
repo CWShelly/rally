@@ -1,4 +1,8 @@
 import database from '../firebase/firebase'
+import moment from 'moment';
+const now = moment()
+
+export const response = {};
 
 
 export const addEvent = (_event)=>({
@@ -28,18 +32,32 @@ export const startAddEvent = (eventData = {}) => {
 
   } = eventData;
   const theEvent = { people_going, people_interested, street_address, event_name, event_image, city, _state, time, date, zip, createdAt, tags, creator_id}
-  console.log(theEvent);
 
-  // database.ref(`events/${uid}/events`).push(theEvent)
     database.ref(`events`).push(theEvent)
+  // database.ref(`events`).set(theEvent, (error)=>{
+  //   if(error){
+  //     console.log('failed');
+  //   }
+  //   else{
+  //     console.log('success!!!!');
+  //   }
+  // })
   .then((ref) => {
     console.log(ref.key);
-    localStorage.setItem('just_created_event_id', ref.key)
+
+    response['key'] = ref.key;
+
+    // response['key'] =()=>{
+    //   return this.mykey='THIS IS A KEY'
+    // }
+    response['time'] =  moment().format('MMMM Do YYYY, h:mm:ss a')
     dispatch(addEvent({
       id: ref.key,
       ... theEvent
     }));
   })
+
+
 
   }
 

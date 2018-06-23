@@ -10,28 +10,14 @@ import sb2 from '../selectors/sb2'
 
 export class MyEventList extends React.Component{
 
-constructor(props){
-  super(props);
-  this.state={
-
-  }
-}
-
-componentDidMount(){
-
-  this.props.startSetMyEvents()
-}
-
-
-
  render(){
 
-console.log(this.props.eventsICreated);
+console.log(this.props.events);
    return(
      <div >
      {this.props.events.length > 0 ? <h1>Events that I am either attending or interested in</h1> : ''}
       {this.props.events.map((_event)=>{
-
+console.log(_event);
         return <MyEventListItem key={_event.id}   { ..._event} />
       })}
 
@@ -49,15 +35,24 @@ console.log(this.props.eventsICreated);
 
 }
 
-
 const mapStateToProps = (state, props)=>{
+console.log(state);
+const eventsICreated = sb2(state.events, localStorage.getItem('user_id'))
+const eventsImInterestedGoing = sb(state.events, state.myevents)
 
+
+console.log(eventsImInterestedGoing);
 return{
-  events:sb(state.events, state.myevents),
-  eventsICreated: sb2(state.events, localStorage.getItem('user_id')),
+  events: eventsImInterestedGoing,
+  eventsICreated:eventsICreated ,
   myevents: state.myevents
 }
 
+// return {
+//   events: state.events,
+//   eventsIcreated:state.events,
+//   myevents: state.myevents
+// }
 }
 
 const mapDispatchToProps = (dispatch, props)=>{

@@ -12,7 +12,6 @@ class MyEventListItem extends React.Component{
   constructor(props){
 
     super(props);
-    console.log(props);
     this.state={
       event_id: props.event_id,
       going: props.going,
@@ -26,7 +25,7 @@ class MyEventListItem extends React.Component{
            going: !prevState.going,
            interested: false
          }))
-         console.log(this.state);
+
          resolve(success);
          reject('fail')
        })
@@ -44,15 +43,11 @@ class MyEventListItem extends React.Component{
 
 
 onHandleGoing=(x)=>{
-  console.log('handle going');
-  console.log('myevent_id: ', x);
-     console.log(this.state);
+
 
  let a = this.setStateGoing(x)
  .then(()=>{
-   console.log('handle going state');
-   console.log(this.state);
-       console.log(this.props);
+
    this.props.startEditMyEvent(x, this.state)
 
  })
@@ -75,7 +70,7 @@ onHandleRemove=()=>{
 }
 
   render(){
-
+console.log(this.props);
     return(
       <div className="row">
        {this.props.event_name} at {this.props.city}

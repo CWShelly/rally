@@ -5,7 +5,7 @@ export default (state = eventsReducerDefaultState, action)=>{
     case 'ADD_EVENT':
       return [
         ...state,
-        action.event
+        action._event
       ];
     case 'REMOVE_EVENT':
      return state.filter(( { id }) =>{

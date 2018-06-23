@@ -48,12 +48,12 @@ if(user){
 
   store.dispatch(login(user.uid))
 localStorage.setItem('user_id', user.uid);
-
+   store.dispatch(startSetMyEvents())
 store.dispatch(startSetEvents())
      .then(() => {
        console.log('log in');
-       store.dispatch(startSetMyEvents())
-     
+
+
        renderApp();
        if(history.location.pathname === '/'){
          history.push('/events')

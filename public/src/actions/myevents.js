@@ -7,6 +7,7 @@ export const addMyEvent = (myEvent)=>({
 })
 
 export const startAddMyEvent = (myEventData = {}) => {
+console.log('adding my event');
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
 

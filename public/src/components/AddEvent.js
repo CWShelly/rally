@@ -1,39 +1,72 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startAddEvent, startSetEvents } from '../actions/events';
+import { startAddEvent, startSetEvents, response} from '../actions/events';
 import { startAddMyEvent } from '../actions/myevents'
 import EventForm from './EventForm';
 
+import moment from 'moment';
 
+const now = moment();
 export class AddEvent extends React.Component{
 
- onSubmit=(_event)=>{
+  constructor(props){
+    super(props);
+    this.state={
+      id: ''
+    }
+  }
 
+ onSubmit=(_event)=>{
+   // console.log(this.props.startAddEvent(_event));
 
    let a = Promise.resolve(this.props.startAddEvent(_event))
-   console.log(a);
-   a.then(( )=>{
-     console.log(localStorage.getItem('just_created_event_id'));
-     this.props.startAddMyEvent({
-       event_id: localStorage.getItem("just_created_event_id"),
-       going: true,
-       interested: true,
-       createdAt: 0
-     })
 
+
+
+   a.then(()=>{
+
+     setTimeout(()=>{
+       console.log('yes');
+         console.log(response['key']);
+         this.props.startAddMyEvent({
+           event_id: response.key,
+           going: true,
+           interested: true,
+             createdAt:  moment().format('MMMM Do YYYY, h:mm:ss a')
+         })
+     }, 500)
    })
-   .catch((err)=>{
-     console.log("err: " , err);
-   })
+
+
     .then(()=>{
-   
-           this.props.startSetEvents()
-           this.props.history.push('/')
 
-    })
-    .catch((err)=>{
-      console.log("err: " , err);
-    })
+
+      console.log(response);
+      console.log(response['key']);
+
+         })
+
+   // })
+
+
+//    .then(()=>{
+//      this.props.startAddMyEvent({
+//        event_id: this.state.id,
+//        going: true,
+//        interested: true,
+//          createdAt:  moment().format('MMMM Do YYYY, h:mm:ss a')
+//      })
+//    })
+//     .then(()=>{
+//
+//            // this.props.startSetEvents()
+//            this.props.history.push('/events')
+//            // this.props.history.push('/myevents')
+//
+//     })
+//     .catch((err)=>{
+//       console.log("err: " , err);
+//     })
 
   }
 
@@ -54,7 +87,7 @@ export class AddEvent extends React.Component{
 
 const mapDispatchToProps = (dispatch)=> ({
      startAddEvent: (_event)=> dispatch(startAddEvent(_event)),
-     startAddMyEvent: (_event)=> dispatch(startAddMyEvent(_event)),
+     startAddMyEvent: (data)=> dispatch(startAddMyEvent(data)),
       // startSetEvents: ()=>{dispatch(startSetEvents())}
       startSetEvents:()=>dispatch(startSetEvents())
 })
