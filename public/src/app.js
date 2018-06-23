@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 // import { getUsers } from './actions/users';
 import { startSetEvents } from './actions/events';
 import { startSetMyEvents } from './actions/myevents'
+import { startSetProfiles } from './actions/profiles';
+import { getUsers } from './actions/users';
 import { login, logout } from './actions/auth';
 import configureStore from './store/configureStore';
 import AppRouter, { history } from './routers/AppRouter';
@@ -49,6 +51,8 @@ if(user){
   store.dispatch(login(user.uid))
 localStorage.setItem('user_id', user.uid);
    store.dispatch(startSetMyEvents())
+   store.dispatch(startSetProfiles());
+store.dispatch(getUsers())
 store.dispatch(startSetEvents())
      .then(() => {
        console.log('log in');

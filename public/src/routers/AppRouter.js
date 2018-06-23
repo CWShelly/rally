@@ -9,11 +9,11 @@ import PublicRoute from './PublicRoute';
 import NotFound from '../components/NotFound';
 import AddEvent from '../components/AddEvent';
 import EditEvent from '../components/EditEvent';
-// import ViewChapterSummaryPage from '../components/ViewChapterSummaryPage';
 
-// import Profile from '../components/Profile';
-// import EditProfile from '../components/EditProfile';
-// import ViewOtherLibraries from '../components/ViewOtherLibraries';
+
+import Profile from '../components/Profile';
+import EditProfile from '../components/EditProfile';
+
 
 import ViewEvents from '../components/ViewEvents'
 import ViewMyEvents from '../components/ViewMyEvents'
@@ -25,7 +25,7 @@ const AppRouter = ()=>(
   <Router history={history}>
 
   <div>
-
+to=
 
   <Switch>
     <PublicRoute path="/" component={LogIn} exact={true} />
@@ -33,6 +33,8 @@ const AppRouter = ()=>(
     <PrivateRoute path="/myevents" component={ViewMyEvents} />
     <PrivateRoute path="/addevent" component={AddEvent} />
     <PrivateRoute path="/editevent/:id" component={EditEvent} />
+      <PrivateRoute path="/editProfile/:id" component={EditProfile} />
+    <PrivateRoute path="/myprofile" component={Profile} />
   <Route component={NotFound} />
   </Switch>
   </div>

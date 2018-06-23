@@ -37,6 +37,9 @@ export class Header extends React.Component{
                          <li className="nav-item">
                            <NavLink to="/myevents" className="nav-link">My Events</NavLink>
                          </li>
+                         <li className="nav-item">
+                           <NavLink to="/myprofile" className="nav-link">My Profile</NavLink>
+                         </li>
 
                          <li className="nav-item">
                            <NavLink to="/addevent" className="nav-link">Post Event</NavLink>

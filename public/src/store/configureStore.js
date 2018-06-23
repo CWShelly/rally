@@ -3,6 +3,8 @@ import thunk from 'redux-thunk';
 import authReducer from '../reducers/auth';
 import eventsReducer from '../reducers/events';
 import myEventsReducer from '../reducers/myevents';
+import profilesReducer from '../reducers/profiles';
+import userReducer from '../reducers/users'
 const composeEnhanchers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose;
 
 
@@ -15,7 +17,8 @@ export default () => {
 
       auth: authReducer,
       // filters: filtersReducer,
-      // _users: userReducer
+      _users: userReducer,
+      profiles:profilesReducer
 
 
     }),
