@@ -12,7 +12,7 @@ import { firebase } from './firebase/firebase';
 // import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'bootstrap/dist/css/bootstrap.css';
-
+import 'react-dates/lib/css/_datepicker.css';
 const store = configureStore();
 
 console.log('app');
