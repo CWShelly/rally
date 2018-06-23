@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { storage } from '../firebase/firebase';
+import { SingleDatePicker } from 'react-dates';
 const now = moment();
 
 export default class EventForm extends React.Component{
@@ -13,9 +14,9 @@ export default class EventForm extends React.Component{
       city:  props._event ? props._event.city : '',
       _state: props._event ? props._event._state : '',
       zip: props._event ? props._event.zip : '',
-      date: props._event ? props._event.date : '',
+      event_date: props._event ? moment(props._event.event_date): moment(),
       time: props._event ? props._event.time : '',
-      createdAt: props._event ? props._event.createdAt: moment().format('MMMM Do YYYY, h:mm:ss a'),
+      createdAt:props._event ? moment(props._event.createdAt):  moment(), 
       error: '',
       event_image: props._event ? props._event.event_image : '',
       input: '',
@@ -27,18 +28,16 @@ export default class EventForm extends React.Component{
       progress: 0,
       file: '',
       creator_id: 'tbd',
-      initial_going_and_interested: ''
+      initial_going_and_interested: '',
+      calendarFocused: false,
 
     }
   }
 
-componentDidMount(){
-  this.thing()
-}
-
-thing = ()=>{
-  console.log('that thing');
-}
+  onFocusChange = ( { focused } ) => {
+    this.setState(
+      ()=>({ calendarFocused: focused }))
+  }
   hasSet=(x)=>{
     return new Promise((resolve,reject)=>{
       let arr = this.state.interestsArr.reduce((collection, item)=>{
@@ -142,11 +141,10 @@ setPic =(e,x)=>{
       this.setState(()=>({ zip }));
 
     }
-  onEventDateChange = (e) =>{
-    const date = e.target.value;
-    this.setState(()=>({ date }));
 
-  }
+
+
+
 
   onTimeChange = (e) =>{
     const time = e.target.value;
@@ -155,9 +153,13 @@ setPic =(e,x)=>{
   }
 
 
-  onDateChange = (createdAt) =>{
-   if(createdAt){
-     this.setState(()=>({ createdAt }))
+  onDateChange = (event_date) =>{
+    console.log(event_date);
+   if(event_date){
+     this.setState(()=>({ event_date }))
+   }
+   else{
+     console.log('no date');
    }
   }
 
@@ -182,6 +184,7 @@ goingInterested[localStorage.getItem('user_id')] =true
       }));
         if(!this.state.error){
           console.log('no error');
+          console.log(this.state);
 
 
         }
@@ -192,7 +195,7 @@ goingInterested[localStorage.getItem('user_id')] =true
     .then(()=>{
 
       if( !this.state.event_name || !this.state.street_address || !this.state.city || !this.state._state || !this.state.zip
-        || !this.state.date || !this.state.time
+        || !this.state.event_date || !this.state.time
       ){
 
         this.setState(()=>({error: 'All fields required'}));
@@ -206,7 +209,7 @@ goingInterested[localStorage.getItem('user_id')] =true
           city: this.state.city,
           _state: this.state._state,
           zip: this.state.zip,
-          date: this.state.date,
+          event_date: this.state.event_date.valueOf(),
           time: this.state.time,
           createdAt: this.state.createdAt.valueOf(),
           event_image: this.state.event_image,
@@ -222,7 +225,7 @@ goingInterested[localStorage.getItem('user_id')] =true
           this.state.city= "";
           this.state._state = "";
           this.state.zip = "";
-          this.state.date= "";
+          this.state.event_date= "";
           this.state.time = "";
 
         }
@@ -366,16 +369,7 @@ goingInterested[localStorage.getItem('user_id')] =true
                 />
                 </div>
 
-                <div className="form-group">
-                <label>Date</label>
-                 <input
-                 type="text"
-                 placeholder="Date"
-                 className="form-control"
-                 value={this.state.date}
-                 onChange={this.onEventDateChange}
-                 />
-                 </div>
+
 
                  <div className="form-group">
                  <label>Time</label>
@@ -387,6 +381,16 @@ goingInterested[localStorage.getItem('user_id')] =true
                   onChange={this.onTimeChange}
                   />
                   </div>
+
+                  <SingleDatePicker
+              date={this.state.event_date}
+              onDateChange={this.onDateChange}
+              focused={this.state.calendarFocused}
+              onFocusChange={this.onFocusChange}
+              numberOfMonths={1}
+              isOutsideRange={ (day) => false}
+
+               />
 
                 <button className="btn btn-primary btn-lg"> Add Event</button>
 

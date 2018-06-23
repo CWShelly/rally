@@ -21,7 +21,7 @@ export const startAddEvent = (eventData = {}) => {
     city='',
     _state='',
     zip=0,
-    date='',
+    event_date=0,
     time='',
     createdAt = 0,
     event_image= '',
@@ -31,7 +31,7 @@ export const startAddEvent = (eventData = {}) => {
     people_going={}
 
   } = eventData;
-  const theEvent = { people_going, people_interested, street_address, event_name, event_image, city, _state, time, date, zip, createdAt, tags, creator_id}
+  const theEvent = { people_going, people_interested, street_address, event_name, event_image, city, _state, time, event_date, zip, createdAt, tags, creator_id}
 
     database.ref(`events`).push(theEvent)
   // database.ref(`events`).set(theEvent, (error)=>{
