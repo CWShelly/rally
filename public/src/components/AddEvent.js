@@ -12,61 +12,62 @@ export class AddEvent extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      id: ''
+      time: moment().format('MMMM Do YYYY, h:mm:ss a'),
+      interval:'',
+      count: 0,
+      id: '',
+
+
     }
   }
 
+  thing = ()=>{
+    console.log('thing');
+    this.setState(( )=>({
+      interval: setInterval(this.message, 500),
+
+    }))
+  }
+
+
+  message = ()=>{
+    console.log('helllo!', response.key);
+
+    this.setState((prevState)=>({
+      count: prevState.count++
+    }))
+
+    if(response.key !== '' || !undefined && this.state.count <5){
+      this.setState((prevState)=>({
+        interval: clearInterval(prevState.interval)
+      }));
+
+      this.props.startAddMyEvent({
+        event_id: response.key,
+        going: true,
+        interested: true,
+        createdAt:  moment().format('MMMM Do YYYY, h:mm:ss a')
+      })
+  }
+  else if(this.state.count === 5){
+    this.setState((prevState)=>({
+      interval: clearInterval(prevState.interval)
+    }));
+  }
+
+
+}
+
+
+
  onSubmit=(_event)=>{
-   // console.log(this.props.startAddEvent(_event));
 
    let a = Promise.resolve(this.props.startAddEvent(_event))
 
-
-
    a.then(()=>{
+   this.thing()
 
-     setTimeout(()=>{
-       console.log('yes');
-         console.log(response['key']);
-         this.props.startAddMyEvent({
-           event_id: response.key,
-           going: true,
-           interested: true,
-             createdAt:  moment().format('MMMM Do YYYY, h:mm:ss a')
-         })
-     }, 500)
-   })
-
-
-    .then(()=>{
-
-
-      console.log(response);
-      console.log(response['key']);
-
-         })
-
-   // })
-
-
-//    .then(()=>{
-//      this.props.startAddMyEvent({
-//        event_id: this.state.id,
-//        going: true,
-//        interested: true,
-//          createdAt:  moment().format('MMMM Do YYYY, h:mm:ss a')
-//      })
-//    })
-//     .then(()=>{
-//
-//            // this.props.startSetEvents()
-//            this.props.history.push('/events')
-//            // this.props.history.push('/myevents')
-//
-//     })
-//     .catch((err)=>{
-//       console.log("err: " , err);
-//     })
+})
 
   }
 
