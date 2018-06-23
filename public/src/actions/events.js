@@ -21,7 +21,7 @@ export const startAddEvent = (eventData = {}) => {
     city='',
     _state='',
     zip=0,
-    event_date=0,
+
     time='',
     createdAt = 0,
     event_image= '',
@@ -31,25 +31,15 @@ export const startAddEvent = (eventData = {}) => {
     people_going={}
 
   } = eventData;
-  const theEvent = { people_going, people_interested, street_address, event_name, event_image, city, _state, time, event_date, zip, createdAt, tags, creator_id}
+  const theEvent = { people_going, people_interested, street_address, event_name, event_image, city, _state, time, zip, createdAt, tags, creator_id}
 
     database.ref(`events`).push(theEvent)
-  // database.ref(`events`).set(theEvent, (error)=>{
-  //   if(error){
-  //     console.log('failed');
-  //   }
-  //   else{
-  //     console.log('success!!!!');
-  //   }
-  // })
+
   .then((ref) => {
     console.log(ref.key);
 
     response['key'] = ref.key;
 
-    // response['key'] =()=>{
-    //   return this.mykey='THIS IS A KEY'
-    // }
     response['time'] =  moment().format('MMMM Do YYYY, h:mm:ss a')
     dispatch(addEvent({
       id: ref.key,
