@@ -6,18 +6,18 @@ import { startSetMyEvents } from '../actions/myevents';
 import uuidv4 from 'uuid/v4';
 import getEvents from '../selectors/getEventsById';
 import sb from '../selectors/sb';
-import sb2 from '../selectors/sb2'
+import sb2 from '../selectors/sb2';
+import interested from '../selectors/interested'
 
 export class MyEventList extends React.Component{
 
  render(){
 
-console.log(this.props.events);
+console.log(this.props);
    return(
      <div >
      {this.props.events.length > 0 ? <h1>Events that I am either attending or interested in</h1> : ''}
       {this.props.events.map((_event)=>{
-console.log(_event);
         return <MyEventListItem key={_event.id}   { ..._event} />
       })}
 
@@ -37,22 +37,24 @@ console.log(_event);
 
 const mapStateToProps = (state, props)=>{
 console.log(state);
-const eventsICreated = sb2(state.events, localStorage.getItem('user_id'))
-const eventsImInterestedGoing = sb(state.events, state.myevents)
+const eventsICreated = sb2(state.events, localStorage.getItem('user_id'));
+const eventsImInterestedGoing = sb(state.events, state.myevents);
 
+let filtered = ()=>{
+  for (let i =0; i<eventsICreated.length; i++){
+   interested(eventsICreated[i].people_interested)
 
-console.log(eventsImInterestedGoing);
+  }
+  return eventsICreated;
+}
+// console.log(filtered());
 return{
   events: eventsImInterestedGoing,
-  eventsICreated:eventsICreated ,
+  eventsICreated:filtered(),
   myevents: state.myevents
 }
 
-// return {
-//   events: state.events,
-//   eventsIcreated:state.events,
-//   myevents: state.myevents
-// }
+
 }
 
 const mapDispatchToProps = (dispatch, props)=>{

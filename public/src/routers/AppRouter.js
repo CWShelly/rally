@@ -25,7 +25,7 @@ const AppRouter = ()=>(
   <Router history={history}>
 
   <div>
-to=
+ 
 
   <Switch>
     <PublicRoute path="/" component={LogIn} exact={true} />
