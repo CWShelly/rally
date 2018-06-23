@@ -7,7 +7,8 @@ import uuidv4 from 'uuid/v4';
 import getEvents from '../selectors/getEventsById';
 import sb from '../selectors/sb';
 import sb2 from '../selectors/sb2';
-import interested from '../selectors/interested'
+import interested from '../selectors/interested';
+
 
 export class MyEventList extends React.Component{
 
@@ -42,7 +43,9 @@ const eventsImInterestedGoing = sb(state.events, state.myevents);
 
 let filtered = ()=>{
   for (let i =0; i<eventsICreated.length; i++){
-   interested(eventsICreated[i].people_interested)
+   interested(eventsICreated[i].people_interested);
+   interested(eventsICreated[i].people_going)
+
 
   }
   return eventsICreated;
