@@ -218,7 +218,7 @@ let theEvent=
        {this.props.event_name} at {this.props.city}  on {moment(this.props.createdAt).format('MMMM Do, YYYY')}
         <button   className={this.state.going ? "btn btn-primary btn-xs" : "btn btn-secondary btn-xs"}  onClick={(e)=>{this.onHandleGoing(this.props.id)}} >{this.state.going ? 'going' : 'attend'}</button>
       { !this.state.going && <button
-        className={this.state.interested ? "btn btn-info btn-xs" : "btn btn-secondary btn-xs"}  onClick={(e)=>{this.onHandleInterest(this.props.id)}} >{this.state.interested ? 'interested: y' : 'interested?'}</button>
+        className={this.state.interested ? "btn btn-info btn-xs" : "btn btn-secondary btn-xs"}  onClick={(e)=>{this.onHandleInterest(this.props.id)}} >interested</button>
       }
       </div>
 
