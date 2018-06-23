@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import uuidv4 from 'uuid/v4';
 import { startAddMyEvent, startSetMyEvents, startEditMyEvent, startRemoveMyEvent } from '../actions/myevents';
 import { startEditEvent } from '../actions/events';
-
+import moment from 'moment';
 
 class MyEventListItem extends React.Component{
 
@@ -70,10 +70,10 @@ onHandleRemove=()=>{
 }
 
   render(){
-console.log(this.props);
+
     return(
       <div className="row">
-       {this.props.event_name} at {this.props.city}
+       {this.props.event_name} at {this.props.city} on {moment(this.props.createdAt).format('MMMM Do, YYYY')}
         <button className={this.state.going ? "btn btn-success btn-xs" : "btn btn-secondary btn-xs"} onClick={(e)=>{this.onHandleGoing(this.props.myevent_id)}} >
           {this.state.going ? 'going' : 'attend'}
         </button>

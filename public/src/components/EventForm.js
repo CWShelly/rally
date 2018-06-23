@@ -14,9 +14,8 @@ export default class EventForm extends React.Component{
       city:  props._event ? props._event.city : '',
       _state: props._event ? props._event._state : '',
       zip: props._event ? props._event.zip : '',
-      event_date: props._event ? moment(props._event.event_date): moment(),
       time: props._event ? props._event.time : '',
-      createdAt:props._event ? moment(props._event.createdAt):  moment(), 
+      createdAt:props._event ? moment(props._event.createdAt):  moment(),
       error: '',
       event_image: props._event ? props._event.event_image : '',
       input: '',
@@ -34,10 +33,7 @@ export default class EventForm extends React.Component{
     }
   }
 
-  onFocusChange = ( { focused } ) => {
-    this.setState(
-      ()=>({ calendarFocused: focused }))
-  }
+
   hasSet=(x)=>{
     return new Promise((resolve,reject)=>{
       let arr = this.state.interestsArr.reduce((collection, item)=>{
@@ -152,11 +148,15 @@ setPic =(e,x)=>{
 
   }
 
+  onFocusChange = ( { focused } ) => {
+    this.setState(
+      ()=>({ calendarFocused: focused }))
+  }
 
-  onDateChange = (event_date) =>{
-    console.log(event_date);
-   if(event_date){
-     this.setState(()=>({ event_date }))
+  onDateChange = (createdAt) =>{
+    console.log(createdAt);
+   if(createdAt){
+     this.setState(()=>({ createdAt }))
    }
    else{
      console.log('no date');
@@ -195,7 +195,7 @@ goingInterested[localStorage.getItem('user_id')] =true
     .then(()=>{
 
       if( !this.state.event_name || !this.state.street_address || !this.state.city || !this.state._state || !this.state.zip
-        || !this.state.event_date || !this.state.time
+        || !this.state.createdAt || !this.state.time
       ){
 
         this.setState(()=>({error: 'All fields required'}));
@@ -209,7 +209,6 @@ goingInterested[localStorage.getItem('user_id')] =true
           city: this.state.city,
           _state: this.state._state,
           zip: this.state.zip,
-          event_date: this.state.event_date.valueOf(),
           time: this.state.time,
           createdAt: this.state.createdAt.valueOf(),
           event_image: this.state.event_image,
@@ -225,7 +224,7 @@ goingInterested[localStorage.getItem('user_id')] =true
           this.state.city= "";
           this.state._state = "";
           this.state.zip = "";
-          this.state.event_date= "";
+   
           this.state.time = "";
 
         }
@@ -383,7 +382,7 @@ goingInterested[localStorage.getItem('user_id')] =true
                   </div>
 
                   <SingleDatePicker
-              date={this.state.event_date}
+              date={this.state.createdAt}
               onDateChange={this.onDateChange}
               focused={this.state.calendarFocused}
               onFocusChange={this.onFocusChange}

@@ -25,7 +25,6 @@ class EventListItem extends React.Component{
       city:  props.city,
       _state: props._state,
       zip: props.zip,
-      date: props.date,
       time: props.time,
       createdAt: props.createdAt,
      event_image: props.event_image,
@@ -86,7 +85,6 @@ class EventListItem extends React.Component{
         city:  this.props.city,
         _state:this. props._state,
         zip: this.props.zip,
-        date: this.props.date,
         time: this.props.time,
         createdAt: this.props.createdAt,
         event_image: this.props.event_image,
@@ -115,7 +113,6 @@ class EventListItem extends React.Component{
                city:  this.props.city,
                _state:this. props._state,
                zip: this.props.zip,
-               date: this.props.date,
                time: this.props.time,
                createdAt: this.props.createdAt,
               event_image: this.props.event_image,
@@ -163,7 +160,6 @@ let theEvent=
     city:  this.props.city,
     _state:this. props._state,
     zip: this.props.zip,
-    date: this.props.date,
     time: this.props.time,
     createdAt: this.props.createdAt,
    event_image: this.props.event_image,
@@ -190,7 +186,6 @@ let theEvent=
            city:  this.props.city,
            _state:this. props._state,
            zip: this.props.zip,
-           date: this.props.date,
            time: this.props.time,
            createdAt: this.props.createdAt,
           event_image: this.props.event_image,
@@ -220,7 +215,7 @@ let theEvent=
 
     return(
       <div className="row">
-       {this.props.event_name} at {this.props.city}
+       {this.props.event_name} at {this.props.city}  on {moment(this.props.createdAt).format('MMMM Do, YYYY')}
         <button   className={this.state.going ? "btn btn-primary btn-xs" : "btn btn-secondary btn-xs"}  onClick={(e)=>{this.onHandleGoing(this.props.id)}} >{this.state.going ? 'going' : 'attend'}</button>
       { !this.state.going && <button
         className={this.state.interested ? "btn btn-info btn-xs" : "btn btn-secondary btn-xs"}  onClick={(e)=>{this.onHandleInterest(this.props.id)}} >{this.state.interested ? 'interested: y' : 'interested?'}</button>
