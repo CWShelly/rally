@@ -32,9 +32,13 @@ export default class EventForm extends React.Component{
     }
   }
 
+componentDidMount(){
+  this.thing()
+}
 
-
-
+thing = ()=>{
+  console.log('that thing');
+}
   hasSet=(x)=>{
     return new Promise((resolve,reject)=>{
       let arr = this.state.interestsArr.reduce((collection, item)=>{
@@ -319,6 +323,7 @@ goingInterested[localStorage.getItem('user_id')] =true
                 <label>Street Address</label>
                 <input
                 type="text"
+                autoComplete='address-line1'
                 className="form-control"
                 placeholder="Street Address"
                 value={this.state.street_address}
@@ -331,6 +336,7 @@ goingInterested[localStorage.getItem('user_id')] =true
                 <input
                 type="text"
                 placeholder="City"
+
                 className="form-control"
                 value={this.state.city}
                 onChange={this.onCityChange}
@@ -353,6 +359,7 @@ goingInterested[localStorage.getItem('user_id')] =true
                 <input
                 type="text"
                 placeholder="Zip Code"
+                autoComplete='postal-code'
                 className="form-control"
                 value={this.state.zip}
                 onChange={this.onZipChange}
