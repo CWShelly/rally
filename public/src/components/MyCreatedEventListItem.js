@@ -11,14 +11,14 @@ class MyCreatedEventListItem extends React.Component{
 
 
 render(){
-  console.log(this.props);
+ 
   return(
 <div>
  <p>  {this.props.event_name}
  <Link className="btn btn-primary btn-xs"  to={`/editEvent/${this.props.id}`}>
   <span >Edit{' '}</span>
 </Link>
- 
+
   </p>
    </div>
   )

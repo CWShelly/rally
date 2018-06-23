@@ -207,7 +207,7 @@ let theEvent=
        }
      ;
             this.props.startEditEvent(this.props.id, theEvent);
-   
+
             this.props.startEditMyEvent(findByEventId(this.props.myEvents, id)[0].id, myEvent)
      }
     })
@@ -232,7 +232,6 @@ let theEvent=
 }
 
 const mapStateToProps =(state,props)=>{
-
 
   return{
     myEvents:state.myevents
