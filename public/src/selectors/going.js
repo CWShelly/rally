@@ -1,6 +1,6 @@
 export default (going) =>{
 
-console.log(going);
+ 
 
 let the_going = ()=>{
  let keys_arr = Object.keys(going);
