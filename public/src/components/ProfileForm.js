@@ -214,10 +214,10 @@ console.log(this.state.interests);
 
 
     return(
-      <div >
-
-      <div>
-            <ul  >
+      <div className="col">
+      <h1>Your Profile</h1>
+        <div>
+            <ul>
             {this.state.interestsArr.map((item, x)=>{
               return <li    key={x}
             >
@@ -240,39 +240,57 @@ console.log(this.state.interests);
 
        <span></span>
 
+<div className="progress">
+ <div className="progress-bar"  role="progressbar" value={this.state.progress} max="100" name="progressBar"></div>
+</div>
 
- <progress value={this.state.progress} max="100" name="progressBar"></progress>
       <input type="file"
       id="fileButton" onChange={this.sendToStorage}/>
 
       {this.state.error && <p >{this.state.error}</p>}
       <form   onSubmit={this.onSubmit}>
-
+ <div className="form-group">
+ <label>User Name</label>
       <input
       type="text"
+      className="col-sm-4"
       placeholder="User Name"
       value={this.state.user_name}
       onChange={this.onUserNameChange}
       />
+    </div>
 
+    <div className="form-group">
+    <label>Bio:</label>
 
-      <input
-
+    <textarea
       type="text"
-      placeholder="Bio"
+
+      className="form-control note-entry"
+      placeholder="Tell us about yourself."
+      maxLength="500"
       value={this.state.user_bio}
       onChange={this.onUserBioChange}
       />
-
-      <input
-      type="text"
-      placeholder="Location"
-      value={this.state.user_location}
-      onChange={this.onUserLocationChange}
-      />
+    </div>
 
 
-      <button >  Create Profile</button>
+    <div className="form-group">
+    <label>Location</label>
+    <input
+    type="text"
+      className="col-sm-4"
+    placeholder="Location"
+    value={this.state.user_location}
+    onChange={this.onUserLocationChange}
+    />
+    </div>
+
+
+
+
+
+      <button className="btn btn-primary btn-lg">  Create Profile</button>
 
       </form>
 

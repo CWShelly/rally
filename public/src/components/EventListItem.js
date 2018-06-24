@@ -220,6 +220,8 @@ let theEvent=
       { !this.state.going && <button
         className={this.state.interested ? "btn btn-info btn-xs" : "btn btn-secondary btn-xs"}  onClick={(e)=>{this.onHandleInterest(this.props.id)}} >interested</button>
       }
+
+      {this.props.url && <a href={this.props.url}>this.props.url </a>}
       </div>
 
     )

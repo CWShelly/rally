@@ -85,6 +85,8 @@ onHandleRemove=()=>{
       <button className={"btn btn-danger btn-xs"} onClick={this.onHandleRemove} >
         Delete
       </button>
+
+          {this.props.url && <a href={this.props.url}>{this.props.url} </a>}
       </div>
 
     )

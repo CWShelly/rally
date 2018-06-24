@@ -28,10 +28,12 @@ export const startAddEvent = (eventData = {}) => {
     tags = {},
     creator_id=uid,
     people_interested={},
-    people_going={}
+    people_going={},
+    note,
+    url
 
   } = eventData;
-  const theEvent = { people_going, people_interested, street_address, event_name, event_image, city, _state, time, zip, createdAt, tags, creator_id}
+  const theEvent = {url, note, people_going, people_interested, street_address, event_name, event_image, city, _state, time, zip, createdAt, tags, creator_id}
 
     database.ref(`events`).push(theEvent)
 

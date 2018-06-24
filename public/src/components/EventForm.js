@@ -40,10 +40,22 @@ export default class EventForm extends React.Component{
       ],
       showMenu: false,
       pm: false,
-      ampm: 'am'
+      ampm: 'am',
+      note: props._event ? props._event.note: '',
+      url: props._event ? props._event.url: ''
 
     }
   }
+
+//   componentDidMount(){
+//     console.log(this.props.profiles.length );
+// if(this.props.profiles.length === 0){
+//   <Redirect to="/myprofile"/>
+// }
+// else{
+//   console.log("profile created");
+// }
+//   }
 
 
   hasSet=(x)=>{
@@ -120,7 +132,13 @@ setPic =(e,x)=>{
   }
 
 
+onUrlChange = (e)=>{
+  const url = e.target.value;
+  this.setState(()=>({
+    url
+  }))
 
+}
   onEventNameChange = (e) =>{
    const event_name = e.target.value;
    this.setState(()=>({ event_name}));
@@ -255,7 +273,9 @@ goingInterested[localStorage.getItem('user_id')] =true
           event_image: this.state.event_image,
           tags: this.state.tags,
           people_interested: this.state.people_interested,
-          people_going:this.state.people_going
+          people_going:this.state.people_going,
+          note: this.state.note,
+          url: this.state.url
 
         })
 
@@ -265,8 +285,10 @@ goingInterested[localStorage.getItem('user_id')] =true
           this.state.city= "";
           this.state._state = "";
           this.state.zip = "";
+          this.state.note="";
 
           this.state.time = "";
+          this.state.url=""
 
         }
       }
@@ -275,7 +297,11 @@ goingInterested[localStorage.getItem('user_id')] =true
 
 
   }
+onNoteChange = (e)=>{
+  let note = e.target.value;
+this.setState(()=>({note}))
 
+}
 
   handleInterestInputChange=(e)=>{
 
@@ -322,7 +348,7 @@ this.setState((prevState)=>({
 
 
   render(){
-console.log(this.state.time !== 'am');
+ 
 
     return(
       <div className="col-sm-6">
@@ -443,6 +469,33 @@ console.log(this.state.time !== 'am');
               isOutsideRange={ (day) => false}
 
                />
+
+               <div className="form-group">
+      <textarea
+        type="text"
+        className="form-control note-entry"
+        placeholder="Additional Info."
+        maxLength="500"
+        value={this.state.note}
+        onChange={this.onNoteChange}
+        />
+
+
+       <div className="form-group">
+       <label>Addtional Link</label>
+        <input
+        type="text"
+        placeholder="Enter Url"
+        className="form-control"
+        value={this.state.url}
+        onChange={this.onUrlChange}
+        />
+        </div>
+
+
+
+</div>
+
 
                 <button className="btn btn-primary btn-lg"> Add Event</button>
 

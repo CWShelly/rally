@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { startAddEvent, startSetEvents, response} from '../actions/events';
 import { startAddMyEvent } from '../actions/myevents'
 import EventForm from './EventForm';
+import { Redirect } from 'react-router-dom';
 
 import moment from 'moment';
 
@@ -21,6 +22,9 @@ export class AddEvent extends React.Component{
     }
   }
 
+
+
+
   thing = ()=>{
     console.log('thing');
     this.setState(( )=>({
@@ -31,7 +35,7 @@ export class AddEvent extends React.Component{
 
 
   message = ()=>{
-    console.log('helllo!', response.key);
+    console.log('response', response.key);
 
     this.setState((prevState)=>({
       count: prevState.count++
@@ -48,6 +52,8 @@ export class AddEvent extends React.Component{
         interested: true,
         createdAt:  moment().format('MMMM Do YYYY, h:mm:ss a')
       })
+this.props.history.push("/myevents")
+
   }
   else if(this.state.count === 5){
     this.setState((prevState)=>({
@@ -73,7 +79,12 @@ export class AddEvent extends React.Component{
 
 
   render(){
-
+console.log(this.props);
+console.log(this.props.profiles);
+if(!this.props.profiles || this.props.profiles.length === 0){
+  console.log('no profile');
+   return <Redirect to="/myprofile"/>
+}
     return (
 
        <EventForm
@@ -85,11 +96,16 @@ export class AddEvent extends React.Component{
 }
 
 
-
+const mapStateToProps=(state,props)=>{
+  console.log(state.profiles);
+  return{
+    profiles:state.profiles
+  }
+}
 const mapDispatchToProps = (dispatch)=> ({
      startAddEvent: (_event)=> dispatch(startAddEvent(_event)),
      startAddMyEvent: (data)=> dispatch(startAddMyEvent(data)),
       // startSetEvents: ()=>{dispatch(startSetEvents())}
       startSetEvents:()=>dispatch(startSetEvents())
 })
-export default connect(undefined, mapDispatchToProps)(AddEvent)
+export default connect(mapStateToProps, mapDispatchToProps)(AddEvent)
