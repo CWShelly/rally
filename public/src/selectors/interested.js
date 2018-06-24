@@ -1,6 +1,6 @@
 export default (interested) =>{
 
-console.log(interested);
+ 
 
 let the_interested = ()=>{
  let keys_arr = Object.keys(interested);

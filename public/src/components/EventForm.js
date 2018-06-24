@@ -29,6 +29,18 @@ export default class EventForm extends React.Component{
       creator_id: 'tbd',
       initial_going_and_interested: '',
       calendarFocused: false,
+      times:[
+        '1:00pm', '1:30pm','2:00pm','2:30pm','3:00pm','3:30pm','4:00pm','4:30pm',
+        '5:00pm', '5:30pm','6:00pm','6:30pm','7:00pm','7:30pm','8:00pm','8:30pm',
+        '9:00pm','9:30pm','10:00pm','10:30pm','11:00pm',"11:30pm","12:00pm","12:30pm",
+
+        '1:00am', '1:30am','2:00am','2:30am','3:00am','3:30am','4:00am','4:30am',
+        '5:00am', '5:30am','6:00am','6:30am','7:00am','7:30am','8:00am','8:30am',
+        '9:00am','9:30am','10:00am','10:30am','11:00am',"11:30am","12:00am","12:30am"
+      ],
+      showMenu: false,
+      pm: false,
+      ampm: 'am'
 
     }
   }
@@ -142,11 +154,39 @@ setPic =(e,x)=>{
 
 
 
-  onTimeChange = (e) =>{
-    const time = e.target.value;
-    this.setState(()=>({ time }));
-
+  onTimeChange = (time) =>{
+    event.preventDefault()
+   console.log(time);
+    this.setState((prevState)=>({ time,
+      showMenu:!prevState.showMenu
+     }));
   }
+
+  onPMChange=(event)=>{
+  event.preventDefault()
+
+if(this.state.pm){
+  this.setState((prevState)=>({
+    ampm:'am',
+    pm: !prevState.pm,
+    time: prevState.time.slice(0,-2)
+  }))
+
+}
+else{
+  this.setState((prevState)=>({
+    ampm:'pm',
+    pm: !prevState.pm,
+    time: prevState.time.slice(0,-2) + 'pm'
+  }))
+
+}
+
+
+ console.log(this.state);
+ }
+
+
 
   onFocusChange = ( { focused } ) => {
     this.setState(
@@ -194,7 +234,8 @@ goingInterested[localStorage.getItem('user_id')] =true
 
     .then(()=>{
 
-      if( !this.state.event_name || !this.state.street_address || !this.state.city || !this.state._state || !this.state.zip
+      if( !this.state.event_name || !this.state.street_address ||
+        !this.state.city || !this.state._state || !this.state.zip
         || !this.state.createdAt || !this.state.time
       ){
 
@@ -224,7 +265,7 @@ goingInterested[localStorage.getItem('user_id')] =true
           this.state.city= "";
           this.state._state = "";
           this.state.zip = "";
-   
+
           this.state.time = "";
 
         }
@@ -271,12 +312,23 @@ goingInterested[localStorage.getItem('user_id')] =true
      }
   })
   }
+showMenu=(e)=>{
+  e.preventDefault()
+
+this.setState((prevState)=>({
+  showMenu:!prevState.showMenu
+}))
+}
+
 
   render(){
-
+console.log(this.state.time !== 'am');
 
     return(
       <div className="col-sm-6">
+
+
+
 
       <div>
             <ul  >
@@ -310,6 +362,17 @@ goingInterested[localStorage.getItem('user_id')] =true
       {this.state.error && <p >{this.state.error}</p>}
 
       <form onSubmit={this.onSubmit}>
+      <button className="btn btn-primary btn-md mb-2" onClick={this.showMenu}>Times</button>
+     {this.state.time}
+           {this.state.showMenu &&
+             <div>
+           { this.state.times.map((time, index)=>{
+             return <button onClick={(e)=>{this.onTimeChange(time)}} key={index}>{time}</button>
+           })}
+           </div>}
+
+
+
               <div className="form-group">
               <label>Event Name:</label>
                 <input
@@ -370,16 +433,6 @@ goingInterested[localStorage.getItem('user_id')] =true
 
 
 
-                 <div className="form-group">
-                 <label>Time</label>
-                  <input
-                  type="text"
-                  placeholder="Time"
-                  className="form-control"
-                  value={this.state.time}
-                  onChange={this.onTimeChange}
-                  />
-                  </div>
 
                   <SingleDatePicker
               date={this.state.createdAt}
@@ -394,6 +447,8 @@ goingInterested[localStorage.getItem('user_id')] =true
                 <button className="btn btn-primary btn-lg"> Add Event</button>
 
               </form>
+
+
 
       </div>
     )

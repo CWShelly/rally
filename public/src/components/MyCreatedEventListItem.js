@@ -13,16 +13,17 @@ class MyCreatedEventListItem extends React.Component{
 
       return(
 
-     <div>  {this.props.event_name}
+     <div>
+     <h2>{this.props.event_name}</h2>
      <Link className="btn btn-primary btn-xs"  to={`/editEvent/${this.props.id}`}>
       <span >Edit{' '}</span>
     </Link>
 
-    <h2>{this.props.interested.length} Interested</h2>
+    <p>{this.props.interested.length} Interested</p>
     {this.props.interested.map((x)=>{
       return <InterestedPartyListItem key={uuidv4()} { ...x} />
     })}
-     <h2>{this.props.going.length} Going</h2>
+     <p>{this.props.going.length} Going</p>
     {this.props.going.map((x)=>{
       return <GoingPartyListItem key={uuidv4()} { ...x} />
     })}
