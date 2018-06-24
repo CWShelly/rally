@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import uuidv4 from 'uuid/v4';
@@ -13,22 +13,26 @@ class MyCreatedEventListItem extends React.Component{
 
       return(
 
-     <div>
-     <h2>{this.props.event_name}</h2>
-     <Link className="btn btn-primary btn-xs"  to={`/editEvent/${this.props.id}`}>
+     <Fragment>
+<div className="col-md-12">
+     <h2 >{this.props.event_name}</h2>
+     <p  ><Link className="btn btn-primary btn-xs "
+      to={`/editEvent/${this.props.id}`}>
       <span >Edit{' '}</span>
-    </Link>
+    </Link></p>
+</div>
 
-    <p>{this.props.interested.length} Interested</p>
+    <div className="ml-4 mt-2 slug">
+    <h6 className="ml-4">{this.props.interested.length} Interested</h6>
     {this.props.interested.map((x)=>{
       return <InterestedPartyListItem key={uuidv4()} { ...x} />
     })}
-     <p>{this.props.going.length} Going</p>
+     <h6 className="ml-4">{this.props.going.length} Going</h6>
     {this.props.going.map((x)=>{
       return <GoingPartyListItem key={uuidv4()} { ...x} />
     })}
-
-  </div>
+</div>
+  </Fragment>
 
   )
 }

@@ -348,11 +348,10 @@ this.setState((prevState)=>({
 
 
   render(){
- 
+
 
     return(
       <div className="col-sm-6">
-
 
 
 
