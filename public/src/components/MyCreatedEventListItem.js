@@ -42,6 +42,7 @@ let arr = [];
   for(let i = 0; i<state._users.length; i++){
     for(let j=0; j<people_interested.length; j++){
       if(state._users[i].id === people_interested[j]){
+        console.log(i,j);
         arr.push(state._users[i].profiles[Object.keys(state._users[i].profiles)[0] ])
       }
     }

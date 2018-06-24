@@ -13,8 +13,7 @@ import interested from '../selectors/interested';
 export class MyEventList extends React.Component{
 
  render(){
-
-console.log(this.props);
+ 
    return(
      <div >
      {this.props.events.length > 0 ? <h1>Events that I am either attending or interested in</h1> : ''}
