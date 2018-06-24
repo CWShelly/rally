@@ -13,21 +13,25 @@ import interested from '../selectors/interested';
 export class MyEventList extends React.Component{
 
  render(){
- 
+
    return(
-     <div >
-     {this.props.events.length > 0 ? <h1>Events that I am either attending or interested in</h1> : ''}
+     <div  className="row" >
+     <div className="col-sm-12 col-md-6" >
+     {this.props.events.length > 0 ? <h1>Attending or Interested:</h1> : ''}
       {this.props.events.map((_event)=>{
         return <MyEventListItem key={_event.id}   { ..._event} />
       })}
+      </div>
 
-      {this.props.eventsICreated.length > 0 && <h1>Events I created</h1>}
+    <div className="col-sm-12 col-md-6 ">
+      {this.props.eventsICreated.length > 0 &&
+         <h1>Events I created:</h1>}
 
       {this.props.eventsICreated.map((_event)=>{
 
         return <MyCreatedEventListItem key={_event.id}   { ..._event} />
       })}
-
+   </div>
 
       </div>
    )

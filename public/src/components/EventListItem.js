@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -214,15 +214,26 @@ let theEvent=
   render(){
 
     return(
-      <div className="row">
-       {this.props.event_name} at {this.props.city}  on {moment(this.props.createdAt).format('MMMM Do, YYYY')}
-        <button   className={this.state.going ? "btn btn-primary btn-xs" : "btn btn-secondary btn-xs"}  onClick={(e)=>{this.onHandleGoing(this.props.id)}} >{this.state.going ? 'going' : 'attend'}</button>
+      <Fragment >
+       <h2>{this.props.event_name}</h2>
+       <div className="slug ml-4">
+        <p className="ml-4">Where</p>
+        <p className="ml-4">{this.props.street_address}</p>
+        <p className="ml-4">{this.props.city}</p>
+        <p className="ml-4">{this.props.zip}</p>
+        <p className="ml-4">Date {moment(this.props.createdAt).format('MMMM Do, YYYY')}</p>
+        <p className="ml-4">Time: {this.props.time}</p>
+          {this.props.url && <p className="ml-4"><a href={this.props.url}>{this.props.url} </a></p>}
+
+
+         </div>
+        <button   className={this.state.going ? "btn btn-primary btn-xs mb-2 mt-2 ml-4" : "btn btn-secondary btn-xs mb-2 mt-2 ml-4"}  onClick={(e)=>{this.onHandleGoing(this.props.id)}} >{this.state.going ? 'going' : 'attend'}</button>
       { !this.state.going && <button
-        className={this.state.interested ? "btn btn-info btn-xs" : "btn btn-secondary btn-xs"}  onClick={(e)=>{this.onHandleInterest(this.props.id)}} >interested</button>
+        className={this.state.interested ? "btn btn-info btn-xs mb-2 mt-2 " : "btn btn-secondary btn-xs mb-2 mt-2"}  onClick={(e)=>{this.onHandleInterest(this.props.id)}} >interested</button>
       }
 
-      {this.props.url && <a href={this.props.url}>this.props.url </a>}
-      </div>
+
+      </Fragment>
 
     )
   }

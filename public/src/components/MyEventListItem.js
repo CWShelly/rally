@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import uuidv4 from 'uuid/v4';
@@ -10,7 +9,6 @@ import moment from 'moment';
 class MyEventListItem extends React.Component{
 
   constructor(props){
-
     super(props);
     this.state={
       event_id: props.event_id,
@@ -72,22 +70,35 @@ onHandleRemove=()=>{
   render(){
 
     return(
-      <div className="row">
-       {this.props.event_name} at {this.props.city} on {moment(this.props.createdAt).format('MMMM Do, YYYY')}
-        <button className={this.state.going ? "btn btn-success btn-xs" : "btn btn-secondary btn-xs"} onClick={(e)=>{this.onHandleGoing(this.props.myevent_id)}} >
+      <Fragment >
+       <h2>{this.props.event_name}</h2>
+       <div className="ml-4 slug">
+       <p className="ml-4">Where:{this.props.city}</p>
+        <p className="ml-4">Date: {moment(this.props.createdAt).format('MMMM Do, YYYY')}</p>
+        <p className="ml-4">Time: {this.props.time}</p>
+        <p className="ml-4">About: {this.props.note}</p>
+        {this.props.url &&<p className="ml-4"> <a href={this.props.url}>{this.props.url} </a></p>}
+        </div>
+    <div >
+        <button className={this.state.going ?
+          "btn btn-success btn-xs mb-2  mt-2" : "btn btn-secondary btn-xs"}
+          onClick={(e)=>{this.onHandleGoing(this.props.myevent_id)}} >
           {this.state.going ? 'going' : 'attend'}
         </button>
       { !this.state.going &&
-         <button  className={this.state.interested ? "btn btn-info btn-xs" : "btn btn-secondary btn-xs"} onClick={(e)=>{this.onHandleInterest(this.props.myevent_id)}} >
+         <button  className={this.state.interested ?
+           "btn btn-info btn-xs" : "btn btn-secondary btn-xs mb-2  mt-2"}
+           onClick={(e)=>{this.onHandleInterest(this.props.myevent_id)}} >
           {this.state.interested ? 'interested' : 'interested?'}
          </button>
       }
-      <button className={"btn btn-danger btn-xs"} onClick={this.onHandleRemove} >
+      <button className={"btn btn-danger btn-xs mt-2 mb-2 "} onClick={this.onHandleRemove} >
         Delete
       </button>
-
-          {this.props.url && <a href={this.props.url}>{this.props.url} </a>}
       </div>
+
+
+      </Fragment>
 
     )
   }

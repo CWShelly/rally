@@ -5,16 +5,20 @@ import { startSetEvents } from '../actions/events';
 import uuidv4 from 'uuid/v4';
 import compare from '../selectors/compare';
 import filterByEventId from "../selectors/findById";
-import sb3 from '../selectors/sb3'
+import sb3 from '../selectors/sb3';
+import { Redirect } from 'react-router-dom';
 
 export class EventList extends React.Component{
 
 
 render(){
-
-if(this.props.events[this.props.events.length -1]){
+console.log(this.props.profiles);
+if(this.props.profiles === undefined || this.props.profiles.length === 0){
+  return <Redirect to="/myprofile"/>
+}
+else if(this.props.events[this.props.events.length -1]){
     return(
-      <div className="row">
+      <div  >
        {this.props.events.map((_event)=>{
          return <EventListItem key={_event.id}  going={_event.going} interested={_event.interested}   { ..._event} />
        })}
@@ -25,7 +29,7 @@ if(this.props.events[this.props.events.length -1]){
   else{
     return(
       <Fragment>
-      
+
       </Fragment>
     )
   }
@@ -65,7 +69,8 @@ return sb3(state.events)
 
 return{
 
-    events: group()
+    events: group(),
+    profiles: state.profiles
 }
 
 
