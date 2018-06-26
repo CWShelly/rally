@@ -14,6 +14,15 @@ class MyCreatedEventListItem extends React.Component{
       return(
 
      <Fragment>
+
+     {this.props.event_image ?
+       <img className=" col-sm-12 event-image"
+         src={this.props.event_image} />
+         :
+
+         <img className="col-sm-12 event-image"
+           src='/leia.jpg' />
+     }
 <div className="col-md-12">
      <h2 >{this.props.event_name}</h2>
      <p  ><Link className="btn btn-primary btn-xs "

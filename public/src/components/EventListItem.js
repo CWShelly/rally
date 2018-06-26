@@ -212,22 +212,32 @@ let theEvent=
 
 
   render(){
-
+console.log(this.props);
     return(
       <Fragment >
        <h2>{this.props.event_name}</h2>
        <div className="slug ml-4">
-        <p className="ml-4">Where</p>
+       {this.props.event_image ?
+         <img className=" col-sm-12 event-image"
+           src={this.props.event_image} />
+           :
+
+           <img className="col-sm-12 event-image"
+             src='/leia.jpg' />
+       }
+        <p className="ml-4">Where:</p>
         <p className="ml-4">{this.props.street_address}</p>
         <p className="ml-4">{this.props.city}</p>
         <p className="ml-4">{this.props.zip}</p>
-        <p className="ml-4">Date {moment(this.props.createdAt).format('MMMM Do, YYYY')}</p>
+        <p className="ml-4">Date: {moment(this.props.createdAt).format('MMMM Do, YYYY')}</p>
         <p className="ml-4">Time: {this.props.time}</p>
           {this.props.url && <p className="ml-4"><a href={this.props.url}>{this.props.url} </a></p>}
 
 
          </div>
-        <button   className={this.state.going ? "btn btn-primary btn-xs mb-2 mt-2 ml-4" : "btn btn-secondary btn-xs mb-2 mt-2 ml-4"}  onClick={(e)=>{this.onHandleGoing(this.props.id)}} >{this.state.going ? 'going' : 'attend'}</button>
+        <button   className={this.state.going ? "btn btn-primary btn-xs mb-2 mt-2 ml-4" :
+        "btn btn-secondary btn-xs mb-2 mt-2 ml-4"}
+        onClick={(e)=>{this.onHandleGoing(this.props.id)}} >{this.state.going ? 'going' : 'attend'}</button>
       { !this.state.going && <button
         className={this.state.interested ? "btn btn-info btn-xs mb-2 mt-2 " : "btn btn-secondary btn-xs mb-2 mt-2"}  onClick={(e)=>{this.onHandleInterest(this.props.id)}} >interested</button>
       }

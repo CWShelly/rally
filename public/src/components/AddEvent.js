@@ -17,6 +17,7 @@ export class AddEvent extends React.Component{
       interval:'',
       count: 0,
       id: '',
+      event_image: ''
 
 
     }
