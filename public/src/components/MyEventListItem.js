@@ -68,9 +68,17 @@ onHandleRemove=()=>{
 }
 
   render(){
-
+console.log(this.props);
     return(
       <Fragment >
+      {this.props.event_image ?
+        <img className=" col-sm-12 event-image"
+          src={this.props.event_image} />
+          :
+
+          <img className="col-sm-12 event-image"
+            src='/leia.jpg' />
+      }
        <h2>{this.props.event_name}</h2>
        <div className="ml-4 slug">
        <p className="ml-4">Where:{this.props.city}</p>

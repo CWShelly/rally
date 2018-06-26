@@ -47,16 +47,6 @@ export default class EventForm extends React.Component{
     }
   }
 
-//   componentDidMount(){
-//     console.log(this.props.profiles.length );
-// if(this.props.profiles.length === 0){
-//   <Redirect to="/myprofile"/>
-// }
-// else{
-//   console.log("profile created");
-// }
-//   }
-
 
   hasSet=(x)=>{
     return new Promise((resolve,reject)=>{
@@ -120,7 +110,7 @@ setPic =(e,x)=>{
           tangRef.getDownloadURL().then((url)=>{
             console.log(url);
             this.setState(()=>({
-              profile_image:url
+              event_image:url
             }))
           })
           .then(()=>{
@@ -169,41 +159,13 @@ onUrlChange = (e)=>{
     }
 
 
-
-
-
   onTimeChange = (time) =>{
     event.preventDefault()
-   console.log(time);
+
     this.setState((prevState)=>({ time,
       showMenu:!prevState.showMenu
      }));
   }
-
-  onPMChange=(event)=>{
-  event.preventDefault()
-
-if(this.state.pm){
-  this.setState((prevState)=>({
-    ampm:'am',
-    pm: !prevState.pm,
-    time: prevState.time.slice(0,-2)
-  }))
-
-}
-else{
-  this.setState((prevState)=>({
-    ampm:'pm',
-    pm: !prevState.pm,
-    time: prevState.time.slice(0,-2) + 'pm'
-  }))
-
-}
-
-
- console.log(this.state);
- }
-
 
 
   onFocusChange = ( { focused } ) => {
@@ -212,7 +174,7 @@ else{
   }
 
   onDateChange = (createdAt) =>{
-    console.log(createdAt);
+
    if(createdAt){
      this.setState(()=>({ createdAt }))
    }
@@ -227,8 +189,8 @@ else{
     const a = this.hasSet();
 
     a.then(()=>{
-const goingInterested ={}
-goingInterested[localStorage.getItem('user_id')] =true
+      const goingInterested ={}
+      goingInterested[localStorage.getItem('user_id')] =true
 
       if(!this.state.tags )
       {
@@ -286,16 +248,12 @@ goingInterested[localStorage.getItem('user_id')] =true
           this.state._state = "";
           this.state.zip = "";
           this.state.note="";
-
           this.state.time = "";
           this.state.url=""
 
         }
       }
     })
-
-
-
   }
 onNoteChange = (e)=>{
   let note = e.target.value;
@@ -304,22 +262,17 @@ this.setState(()=>({note}))
 }
 
   handleInterestInputChange=(e)=>{
-
     e.persist();
-    // console.log(e.target.value);
     this.setState(()=>({ input:e.target.value }))
   }
 
   handleInputKeyDown=(e)=>{
-
     if(e.keyCode === 13){
       const value = e.target.value.trim();
       this.setState(()=>({
       interestsArr: [...this.state.interestsArr, value],
       input: ''}))
     }
-
-
     if(this.state.interestsArr.length && e.keyCode === 8 && !this.state.input.length){
       this.setState(()=>({
         tagArr: this.state.interestsArr.slice(0, this.state.interestsArr.length -1)
@@ -329,7 +282,6 @@ this.setState(()=>({note}))
 
 
   handleRemoveItem=(itemToRemove, key)=>{
-    console.log('removing');
    this.setState((prevState)=>{
      return{
        interestsArr:this.state.interestsArr.filter((x)=>{
@@ -338,27 +290,23 @@ this.setState(()=>({note}))
      }
   })
   }
-showMenu=(e)=>{
-  e.preventDefault()
 
-this.setState((prevState)=>({
-  showMenu:!prevState.showMenu
-}))
-}
+      showMenu=(e)=>{
+        e.preventDefault()
+      this.setState((prevState)=>({
+        showMenu:!prevState.showMenu
+      }))
+      }
 
 
   render(){
-
-
     return(
       <div className="col-sm-6">
 
-
-
       <div>
-            <ul  >
+            <ul>
             {this.state.interestsArr.map((item, x)=>{
-              return <li    key={x}
+              return <li key={x}
             >
               <span><button className="btn btn-primary btn-xs" >{item}</button>
               <button   className="btn btn-primary btn-xs"  onClick={(e)=>{
